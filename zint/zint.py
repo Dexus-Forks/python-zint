@@ -29,8 +29,11 @@
 from ctypes import POINTER, Structure, c_char, c_char_p, c_float, c_int, c_ubyte, c_uint, cast, cdll, create_string_buffer
 from ctypes.util import find_library
 
-_lib = cdll.LoadLibrary(find_library("libzint"))
-if not _lib:
+path = find_library("zint")
+
+if path:
+	_lib = cdll.LoadLibrary(path)
+else:
 	try:
 		_lib = cdll.LoadLibrary('libzint.so')
 	except:
