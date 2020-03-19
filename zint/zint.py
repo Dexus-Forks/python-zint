@@ -1,20 +1,20 @@
 # Copyright (c) 2019, Aragon Gouveia
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 # * Redistributions of source code must retain the above copyright notice, this
 #   list of conditions and the following disclaimer.
-# 
+#
 # * Redistributions in binary form must reproduce the above copyright notice,
 #   this list of conditions and the following disclaimer in the documentation
 #   and/or other materials provided with the distribution.
-# 
+#
 # * Neither the name of python-zint nor the names of its
 #   contributors may be used to endorse or promote products derived from
 #   this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,14 +27,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from ctypes import POINTER, Structure, c_char, c_char_p, c_float, c_int, c_ubyte, c_uint, cast, cdll, create_string_buffer
+from ctypes.util import find_library
 
-try:
-	_lib = cdll.LoadLibrary('libzint.so')
-except:
-	try:
-		_lib = cdll.LoadLibrary('libzint.dylib')
-	except:
-		_lib = cdll.LoadLibrary('libzint.dll')
+_lib = cdll.LoadLibrary(find_library("libzint"))
 
 ZBarcode_ValidID = _lib.ZBarcode_ValidID
 ZBarcode_ValidID.restype = c_int
@@ -415,7 +410,7 @@ if __libzint_ver >= 20604:
 	ZBarcode_Buffer_Vector = _lib.ZBarcode_Buffer_Vector
 	ZBarcode_Buffer_Vector.restype = c_int
 	ZBarcode_Buffer_Vector.argtypes = [POINTER(zint_symbol), c_int]
-	
+
 	ZBarcode_Encode_and_Buffer_Vector = _lib.ZBarcode_Encode_and_Buffer_Vector
 	ZBarcode_Encode_and_Buffer_Vector.restype = c_int
 	ZBarcode_Encode_and_Buffer_Vector.argtypes = [POINTER(zint_symbol), POINTER(c_ubyte), c_int, c_int]
@@ -503,7 +498,7 @@ if __libzint_ver >= 20604:
 __all__.extend(['DATA_MODE', 'UNICODE_MODE', 'GS1_MODE'])
 if __libzint_ver < 20604:
 	__all__.extend(['KANJI_MODE', 'SJIS_MODE'])
-	
+
 if __libzint_ver >= 20602:
 	__all__.append('ESCAPE_MODE')
 __all__.extend([
