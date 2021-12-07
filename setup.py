@@ -25,12 +25,12 @@ Usage closely follows the C API:
     pass
 
 setup(name='zint',
-      version='1.3',
+      version='1.3.1',
       description='Python ctypes interface to libzint',
       long_description=description.__doc__.strip(),
-      url='http://github.com/jmptbl/python-zint',
-      author='Aragon Gouveia',
-      author_email='aragon@phat.za.net',
+      url='http://github.com/Dexus-Forks/python-zint',
+      author='Josef Fröhle',
+      author_email='github@josef-froehle.de',
       packages=['zint'],
       keywords='zint ctypes',
       license='BSD',
